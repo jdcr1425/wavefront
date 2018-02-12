@@ -27,3 +27,16 @@ def fill_Matriz(matriz,num_filas,num_col):
         for j in range(0,num_col-1):
             matriz[i][j]=0
     return matriz
+
+def getVecindad(fil,col):
+    vecindad=[]
+    if fil>0:
+        vecindad.append([fil-1,col])
+    if fil<3:
+        vecindad.append([fil+1,col])
+    if col>0:
+        vecindad.append([fil,col-1])
+    if col<4:
+        vecindad.append([fil,col+1])
+
+    return vecindad

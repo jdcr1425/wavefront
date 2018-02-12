@@ -3,6 +3,11 @@ import methods
 num_filas=4
 num_col=5
 
+matriz=[[0, 0, 0,  0, 0],
+        [0, 0,-1, -1, 0],
+        [0, 0, 0, -1, 0],
+        [0, 0, 0, -1, 0]]
+
 pasar=False
 while(pasar==False):
 
@@ -10,7 +15,10 @@ while(pasar==False):
     coor_inicio=p_inicio.split(",")
     methods.Check(coor_inicio,int(num_filas),int(num_col))
     if methods.check_dimensions(coor_inicio[0],coor_inicio[1],num_filas,num_col):
-        pasar=True
+        if matriz[int(coor_inicio[0])][int(coor_inicio[1])] == -1:
+            print("Esa cooredenada pertenece a un obstaculo")
+        else:
+            pasar=True
 
 pasar=False
 while(pasar==False):
@@ -21,6 +29,8 @@ while(pasar==False):
         if coor_inicio == coor_fin:
             print("Error! No puede asignar la misma coordenada de inicio")
             pasar=False
+        elif matriz[int(coor_fin[0])][int(coor_fin[1])] == -1:
+            print("Esa cooredenada pertenece a un obstaculo")
         else:
             pasar=True
 
@@ -32,12 +42,38 @@ for i in range(num_filas):
 
 
 #1)etiquetar todos los estados con obstaculos con el valor "-1"
-matriz=[[0, 0, 0,  0, 0],
-        [0, 0,-1, -1, 0],
-        [0, 0, 0, -1, 0],
-        [0, 0, 0, -1, 0]]
 
-print(matriz)
+
+matriz[int(coor_fin[0])][int(coor_fin[1])]=1
+acum=2
+pos_actual = [int(coor_fin[0]), int(coor_fin[1])]
+parar=False
+vec_actual=[]
+
+
+
+
+vecindad = methods.getVecindad(pos_actual[0], pos_actual[1])
+for i in range(0, len(vecindad)):
+    vec_actual = vecindad[i]
+    if matriz[vec_actual[0]][vec_actual[1]] == 0:
+                 matriz[vec_actual[0]][vec_actual[1]] = acum
+pos_actual = [vec_actual[0], vec_actual[1]]
+
+
+
+for i in matriz:
+    print(i)
+
+
+
+
+
+
+
+
+
+
 
 
 
